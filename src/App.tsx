@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, FC } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Spinner from './components/Layout/Spinner/Spinner';
 
-function App() {
+const Home = React.lazy(() => import('./components/Pages/Home/Home'));
+const Post = React.lazy(() => import('./components/Pages/Post/Post'));
+const Edit = React.lazy(() => import('./components/Pages/Edit/Edit'));
+const Create = React.lazy(() => import('./components/Pages/Create/Create'));
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/:id" element={<Post />} />
+            <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/create" element={<Create />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
