@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { NavigationInterface } from './Navigation.interface';
-import { NavigationWrapper } from './Navigation.styles';
+import '../Navigation/Navigation.css';
 
-const Navigation: FC<NavigationInterface> = (props: NavigationInterface) => (
-  <NavigationWrapper>
+const Navigation: FC<NavigationInterface> = (
+  Navigation: NavigationInterface,
+) => (
+  <header className="navWrapper">
     <div className="nav-wrap">
       <Link className="logo-text" to="/">
         Bitdegree
       </Link>
-      <Link className="nav-link" to={props.link}>
-        {props.btnText}
+      <Link className="nav-link" to={Navigation.link}>
+        {Navigation.btnText}
       </Link>
     </div>
-  </NavigationWrapper>
+  </header>
 );
 
 export default Navigation;

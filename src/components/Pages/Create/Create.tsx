@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navigation from '../../Layout/Navigation/Navigation';
 import Form from '../../Layout/Form/Form';
 import { postBlog } from '../../../api/blog-api.requests';
 
 const Create = () => {
   const [userInputs, setUserInputs] = useState({});
+
   return (
     <>
       <Navigation btnText="home" link="/" />

@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navigation from '../../Layout/Navigation/Navigation';
 import Blog from '../../Layout/Blog/Blog';
 import { getBlogs } from '../../../api/blog-api.requests';
-import { HomeContainer } from './Home.styles';
+import '../Home/Home.css';
 
 const Home = () => {
   const [fetchedData, setFetchedData] = useState<any[]>([]);
 
   useEffect(() => {
-    getBlogs(setFetchedData);
-  }, []);
+    const setData = async () => {
+      setFetchedData(await getBlogs());
+    };
+    setData();
+  });
 
   return (
     <>
       <Navigation btnText="New post" link="/create" />
-      <HomeContainer>
+      <section className="homeWrap">
         {fetchedData.length === 0 ? (
           <h2>No Blogs found, please Add new one</h2>
         ) : (
@@ -27,7 +30,7 @@ const Home = () => {
             />
           ))
         )}
-      </HomeContainer>
+      </section>
     </>
   );
 };

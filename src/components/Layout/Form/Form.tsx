@@ -1,22 +1,22 @@
 import React, { FC } from 'react';
 import { FormInterface } from './Form.interface';
-import { FormWrapper } from './Form.styles';
+import '../Form/Form.css';
 
-const Form: FC<FormInterface> = (props: FormInterface) => (
-  <FormWrapper onSubmit={props.handleSubmit}>
+const Form: FC<FormInterface> = (form: FormInterface) => (
+  <form className="formWrapper" onSubmit={form.handleSubmit}>
     <input
       type="text"
-      placeholder={props.firstPlaceholder}
-      onChange={props.firstOnChange}
+      placeholder={form.firstPlaceholder}
+      onChange={form.firstOnChange}
       required
     />
     <textarea
-      placeholder={props.secondPlaceholder}
-      onChange={props.secondOnChange}
+      placeholder={form.secondPlaceholder}
+      onChange={form.secondOnChange}
       required
     />
-    <button>{props.btnText}</button>
-  </FormWrapper>
+    <button>{form.btnText}</button>
+  </form>
 );
 
 export default Form;

@@ -1,49 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import '../Post/Post.css';
+import { getBlogs } from '../../../api/blog-api.requests';
 import Navigation from '../../Layout/Navigation/Navigation';
 import Blog from '../../Layout/Blog/Blog';
-import { PostContainer } from './Post.styles';
-import { getBlogById } from '../../../api/blog-api.requests';
 
 const Post = () => {
   const [fetchedData, setFetchedData] = useState<any[]>([]);
-  const [usersId, setUsersId] = useState(Number);
-  const [BlogsId, setBlogID] = useState(Number);
-  const [titleName, setTitleName] = useState('');
-  const [bodyName, setBodyName] = useState('');
-
-  const params = useParams();
-  const blogId = params.id;
+  const params = useParams().id;
 
   useEffect(() => {
-    getBlogById(
-      blogId,
-      setUsersId,
-      setBlogID,
-      setTitleName,
-      setBodyName,
-      setFetchedData,
-    );
+    const setData = async () => {
+      setFetchedData(await getBlogs());
+    };
+    setData();
   }, []);
 
   return (
     <>
       <Navigation btnText="New post" link="/create" />
-      <PostContainer>
+      <section className="postWrap">
         {fetchedData.length === 0 ? (
           <h2>No Blogs found, please Add new one</h2>
         ) : (
-          <Blog
-            key={BlogsId}
-            link={`/edit/${BlogsId}`}
-            userId={usersId}
-            id={BlogsId}
-            title={titleName}
-            body={bodyName}
-            btnText="Edit blog"
-          />
+          fetchedData
+            .filter((blog) => {
+              if (params == blog.id) {
+                return blog;
+              }
+            })
+            .map((blog) => (
+              <Blog
+                key={blog.id}
+                link={`/edit/${blog.id}`}
+                btnText="Edit blog"
+                {...blog}
+              />
+            ))
         )}
-      </PostContainer>
+      </section>
     </>
   );
 };
