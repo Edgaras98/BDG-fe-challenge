@@ -8,20 +8,20 @@ const Create = () => {
 
   return (
     <>
-      <Navigation btnText="home" link="/" />
+      <Navigation buttonText="home" link="/" />
       <h1>Create new Blog</h1>
       <Form
-        btnText="Post"
-        firstPlaceholder="title"
-        secondPlaceholder="body"
-        handleSubmit={(e) => postBlog(e, userInputs)}
-        firstOnChange={(e) => {
+        text="Post"
+        titlePlaceholder="title"
+        bodyPlaceholder="body"
+        handleClick={(e) => postBlog(userInputs)}
+        titleOnChange={(e) => {
           setUserInputs({
             ...userInputs,
             title: e.target.value,
           });
         }}
-        secondOnChange={(e) => {
+        bodyOnChange={(e) => {
           setUserInputs({
             ...userInputs,
             body: e.target.value,

@@ -1,4 +1,4 @@
-export interface NavigationInterface {
+export interface navigation {
   link: string;
-  btnText: string;
+  buttonText: string;
 }

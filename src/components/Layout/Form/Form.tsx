@@ -1,22 +1,25 @@
-import React, { FC } from 'react';
-import { FormInterface } from './Form.interface';
+import { form } from './Form.interface';
 import '../Form/Form.css';
 
-const Form: FC<FormInterface> = (form: FormInterface) => (
-  <form className="formWrapper" onSubmit={form.handleSubmit}>
-    <input
-      type="text"
-      placeholder={form.firstPlaceholder}
-      onChange={form.firstOnChange}
-      required
-    />
-    <textarea
-      placeholder={form.secondPlaceholder}
-      onChange={form.secondOnChange}
-      required
-    />
-    <button>{form.btnText}</button>
-  </form>
-);
+function Form(form: form) {
+  return (
+    <form className="formWrapper">
+      <input
+        type="text"
+        placeholder={form.titlePlaceholder}
+        onChange={form.titleOnChange}
+        required
+      />
+      <textarea
+        placeholder={form.bodyPlaceholder}
+        onChange={form.bodyOnChange}
+        required
+      />
+      <button type="button" onClick={form.handleClick}>
+        {form.text}
+      </button>
+    </form>
+  );
+}
 
 export default Form;

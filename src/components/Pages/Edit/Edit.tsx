@@ -10,20 +10,20 @@ const Edit = () => {
 
   return (
     <>
-      <Navigation btnText="home" link="/" />
+      <Navigation buttonText="home" link="/" />
       <h1>Posts ID: {params}</h1>
       <Form
-        btnText="update values"
-        firstPlaceholder="New title"
-        secondPlaceholder="New body"
-        handleSubmit={(e) => editBlog(e, params, userInputs)}
-        firstOnChange={(e) => {
+        text="update values"
+        titlePlaceholder="New title"
+        bodyPlaceholder="New body"
+        handleClick={(e) => editBlog(params, userInputs)}
+        titleOnChange={(e) => {
           setUserInputs({
             ...userInputs,
             title: e.target.value,
           });
         }}
-        secondOnChange={(e) => {
+        bodyOnChange={(e) => {
           setUserInputs({
             ...userInputs,
             body: e.target.value,

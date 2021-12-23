@@ -1,8 +1,8 @@
-export interface FormInterface {
-  btnText: string;
-  firstPlaceholder: string;
-  secondPlaceholder: string;
-  handleSubmit: any;
-  firstOnChange: any;
-  secondOnChange: any;
+export interface form {
+  text: string;
+  titlePlaceholder: string;
+  bodyPlaceholder: string;
+  handleClick: any;
+  titleOnChange: any;
+  bodyOnChange: any;
 }

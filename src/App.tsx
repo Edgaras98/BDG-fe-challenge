@@ -13,7 +13,7 @@ const App: FC = () => {
       <Router>
         <Suspense fallback={<Spinner />}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="/:id" element={<Post />} />
             <Route path="/edit/:id" element={<Edit />} />
             <Route path="/create" element={<Create />} />

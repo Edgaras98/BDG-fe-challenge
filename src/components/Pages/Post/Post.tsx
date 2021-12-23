@@ -4,9 +4,10 @@ import '../Post/Post.css';
 import { getBlogs } from '../../../api/blog-api.requests';
 import Navigation from '../../Layout/Navigation/Navigation';
 import Blog from '../../Layout/Blog/Blog';
+import { blog } from '../../Layout/Blog/Blog.interface';
 
 const Post = () => {
-  const [fetchedData, setFetchedData] = useState<any[]>([]);
+  const [fetchedData, setFetchedData] = useState<blog[]>([]);
   const params = useParams().id;
 
   useEffect(() => {
@@ -18,23 +19,23 @@ const Post = () => {
 
   return (
     <>
-      <Navigation btnText="New post" link="/create" />
+      <Navigation buttonText="New post" link="/create" />
       <section className="postWrap">
         {fetchedData.length === 0 ? (
           <h2>No Blogs found, please Add new one</h2>
         ) : (
           fetchedData
-            .filter((blog) => {
-              if (params == blog.id) {
-                return blog;
+            .filter((blogs: blog) => {
+              if (Number(params) == blogs.id) {
+                return blogs;
               }
             })
-            .map((blog) => (
+            .map((blogs: blog) => (
               <Blog
-                key={blog.id}
-                link={`/edit/${blog.id}`}
-                btnText="Edit blog"
-                {...blog}
+                key={blogs.id}
+                {...(blogs.link = `/edit/${blogs.id}`)}
+                {...(blogs.text = 'View Blog')}
+                {...blogs}
               />
             ))
         )}

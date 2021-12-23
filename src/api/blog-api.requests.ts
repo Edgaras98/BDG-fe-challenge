@@ -18,11 +18,13 @@ export function getBlogs() {
     })
     .then((res) => {
       return res.data;
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
-export function postBlog(e, userInputs) {
-  e.preventDefault();
+export function postBlog(userInputs) {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}`, getOptions(userInputs))
     .then((response) => {
@@ -38,8 +40,7 @@ export function postBlog(e, userInputs) {
     });
 }
 
-export function editBlog(e, params, userInputs) {
-  e.preventDefault();
+export function editBlog(params, userInputs) {
   axios
     .put(`${process.env.REACT_APP_BASE_URL}/${params}`, getOptions(userInputs))
     .then((response) => {
@@ -48,5 +49,8 @@ export function editBlog(e, params, userInputs) {
       } else {
         alert('Oh no, something went wrong, please try again');
       }
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
